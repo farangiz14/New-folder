@@ -1,0 +1,5 @@
+Id,name,age,gender,salary
+1,Alex,23,male,1300
+2,Kane,32,male,1460
+3,Ali,28,male,1000
+4,Lilly,female,1300

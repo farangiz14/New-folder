@@ -1,0 +1,82 @@
+"const ENV = {
+    CORE: ""core_export_import"",
+    SHOUTER_LVL: ""INFO"",
+
+    LOGGING_TO_MULTICUBE: {
+        RAISE_ERROR: false,
+        DISABLE: false,
+        LOGGER_CORE : ""core_logger"",
+        SCRIPT_NAME: ""OMMULTICUBE - OMMULTICUBE"",
+        MULTICUBE: ""Script logging"", // название МК для логироваия
+        MULTICUBE_VIEW: null, // вью для логирования
+        SCRIPT_LIST: ""Scripts"", // название измерения скриптов
+        SCRIPT_LIST_VIEW: null, // вью измерения скриптов
+    },
+    SRC: {
+        TYPE: ""OM_MULTICUBE"",
+        PARAMS: {
+            NAME: ""|| LONG_ID {102000000443} ||"",
+            VIEW: ""Source Multicube: flat"",
+            FORMULA_FILTER: `NOT IS_PARENT()`,
+        }
+    },
+    DEST: {
+        TYPE: ""OM_MULTICUBE"",
+        PARAMS: {
+            NAME: ""DEST :: OMMULTICUBE - OMMULTICUBE"",
+            TRANSFORM: {
+                DOWNLOAD_TRANSFORM_FILE: false,
+                DOWNLOAD_IMPORT_REPORT_FILE: true,
+                CHARSET: ""WINDOWS-1251"",
+                SRC_TO_DEST_COLUMN_MAP: {
+                    ""Number"": ""Number"",
+                    ""Item"": ""Item"",
+                    ""Text"": ""Text"",
+                    ""Date"": ""Date"",
+                    ""Boolean"": ""Boolean"",
+                },
+                DIMENSIONS: {
+                    dim1: {
+                        NAME: ""Managers"",
+                        SRC_COLUMN_NAME: 'Managers in company',
+                        CAN_USE_IN_CLEANER: true,
+                        ON_VALUE: ""AS_IS""
+                    },
+                    dim2: {
+                        NAME: ""s.NUM 5"",
+                        SRC_COLUMN_NAME: ""s.NUM 3"",
+                        CAN_USE_IN_CLEANER: false,
+                        ON_VALUE: ""AS_IS""
+                    },
+                    dim3: {
+                        NAME: ""ts.21"",
+                        SRC_COLUMN_NAME: ""TS 2021"",
+                        CAN_USE_IN_CLEANER: true,
+                        ON_VALUE: ""AS_IS""
+                    },
+                    dim4: {
+                        NAME: 'Test Integrity Check',
+                        SRC_COLUMN_NAME: null,
+                        CAN_USE_IN_CLEANER: true,
+                        ON_VALUE: {
+                            TYPE: ""STATIC_VALUE"",
+                            PARAMS: {
+                                VALUE: ""Test Result""
+                            }
+                        }
+                    },
+                },
+            },
+            CLEANER: {
+                STATUS: true,
+            }
+        }
+    }
+};
+
+om.common.resultInfo()
+    .actionsInfo()
+    .makeMacrosAction(ENV.CORE)
+    .appendAfter()
+    .environmentInfo()
+    .set('ENV', ENV);"
